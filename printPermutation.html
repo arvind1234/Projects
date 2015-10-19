@@ -1,0 +1,42 @@
+<html>
+<body>
+<script>
+(function() {
+var a = [1, 2, 3]
+
+//123, 132, 312, 321, 231, 213
+
+function printPermutation(data) {
+    var inputArray = data.inputArray, currentString = data.currentString, indexUsed = data.indexUsed;
+    //3 = 3
+    if(currentString.length === inputArray.length) {
+        console.log(currentString);
+        //print
+        //return
+        return;
+    }
+    
+    for(var i=0;i<inputArray.length;i++) {
+    //i = 2
+        if(indexUsed[i]) {
+            continue;
+        }
+        //123
+        currentString += inputArray[i];
+        indexUsed[i] = true;
+        //printPermutation([1,2,3], "123", [true,true,true])
+        printPermutation({inputArray: inputArray, currentString: currentString, indexUsed: indexUsed});
+        indexUsed[i] = false;
+        currentString = currentString.substring(0, currentString.length - 1);
+    }
+}
+
+var indexUsed = [];
+for(var i=0;i<a.length;i++) {
+    indexUsed[i] = false;
+}
+printPermutation({inputArray: a, currentString: "", indexUsed: indexUsed});
+})();
+</script>
+</body>
+</html>
