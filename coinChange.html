@@ -7,13 +7,28 @@
 </head>
 <body>
     <!--<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>-->
+    <button id="findDenomination">Find Denomination</button>
     <script>
-        function findDenomination(denomination, x) {
+        function findDenomination(denomination, x, numberOfCoins/*, start*/) {
             for (var i = 0, l = denomination.length; i < l; i++) {
                 var reminder = x % denomination[i];
-
+                var y = numberOfCoins + Math.floor(x/denomination[i]);
+                if (x > denomination[i] && reminder > 0) {
+                    findDenomination(denomination, reminder, y);                    
+                } else if (reminder === 0) {
+                    console.log("Number of coins:" + y);
+                }
             }
         };
+        document.getElementById("findDenomination").addEventListener("click", function () {
+            //findDenomination([1,2,5,10], 89, 0/*, 0*/);
+            //findDenomination([1,10,30,40], 60, 0/*, 0*/);
+            findDenomination([1,5, 10,20,25], 40, 0/*, 0*/);        
+        });
+        
+        var ar = [];
+        ar.push({name: "Arvind", age: 22});
+        ar.push({name: "Nithya", age: 42});
     </script>
 
 </body>
