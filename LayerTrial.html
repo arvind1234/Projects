@@ -1,0 +1,104 @@
+<html>
+
+    <head>
+        <style type="text/css">
+            #layerDiv {
+                border-width: 1px;
+                border-style: solid;
+                border-radius: 10px;
+                height: 25%;
+                width: 25%;
+                background-color: red;
+                position: absolute;
+                top: 0px;
+                left: 0px;
+            }
+            #headerDiv {
+                width: 100%;
+                height: 10%;
+                background-color: blue;
+                border-top-left-radius: 10px;
+                border-top-right-radius: 10px;
+                cursor: move;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="layerDiv">
+            <div id="headerDiv"></div>
+            <div id="consoleDiv"></div>
+        </div>
+        <script>
+            var layerDiv = document.getElementById("layerDiv");
+            var headerDiv = document.getElementById("headerDiv");
+            var headerDivClicked = false;
+
+            headerDiv.addEventListener("mousedown", function () {
+                headerDivClicked = true;
+            });
+
+            document.addEventListener("mouseup", function () {
+                headerDivClicked = false;
+            });
+
+            document.addEventListener("mousemove", function (evt) {
+                if (!headerDivClicked) {
+                    return;
+                }
+
+                layerDiv.style.top = evt.y;
+                layerDiv.style.left = evt.x
+            });
+
+            var ctrlClicked = false;
+            document.addEventListener("keyup", function (e) {
+                if (ctrlClicked && e.keyCode === 17) {
+                    ctrlClicked = false;
+                }
+            });
+
+            document.addEventListener("keydown", function (e) {
+                var keyCode = e.keyCode;
+                if (keyCode === 17) {
+                    ctrlClicked = true;
+                }
+                else if (keyCode === 39) {
+                    if (ctrlClicked) {
+                        layerDiv.style.left = layerDiv.offsetLeft + 2 + "px";
+                    }
+                    else {
+                        ctrlClicked = false;
+                    }
+                }
+                else if (keyCode === 37) {
+                    if (ctrlClicked) {
+                        layerDiv.style.left = layerDiv.offsetLeft - 2 + "px";
+                    }
+                    else {
+                        ctrlClicked = false;
+                    }
+                }
+                else if (keyCode === 40) {
+                    if (ctrlClicked) {
+                        layerDiv.style.top = layerDiv.offsetTop + 2 + "px";
+                    }
+                    else {
+                        ctrlClicked = false;
+                    }
+                }
+                else if (keyCode === 38) {
+                    if (ctrlClicked) {
+                        layerDiv.style.top = layerDiv.offsetTop - 2 + "px";
+                    }
+                    else {
+                        ctrlClicked = false;
+                    }
+                }
+                else {
+                    ctrlClicked = false;
+                }
+                document.getElementById("consoleDiv").innerHTML += "keyPressed:" + e.keyCode + "<br/>";
+            });
+        </script>
+    </body>
+</html>
