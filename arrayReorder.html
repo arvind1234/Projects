@@ -1,0 +1,39 @@
+<html>
+<head>
+	<title>
+		Array Reorder
+	</title>
+</head>
+<body>
+	<!--We have an array of objects A and an array of indexes B. Reorder objects in array A with given indexes in array B. Do not change array A's length.
+Example:
+var a = [C, D, E, F, G];
+var b = [3, 0, 4, 1, 2];
+
+output: a = [D, F, G, C, E]-->
+	<script>
+		(function () { 
+			var a = ["C", "D", "E", "F", "G"];
+			var b = [3, 0, 4, 1, 2];
+			console.log("hhi");
+			var i = 0;
+			while (i<a.length) {
+				var aIndex=b[i];
+				if(i !== aIndex) {
+					var temp = a[aIndex];
+					a[aIndex] = a[i];
+					a[i] = temp;
+					
+					temp = b[aIndex];
+					b[aIndex] = b[i];
+					b[i] = temp; 
+				} else {
+					i++;
+				}
+			}
+			console.log(a);
+		})();
+	</script>
+</body>
+
+</html>
