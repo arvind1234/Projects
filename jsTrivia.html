@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <script>
+        try {
+            console.log("before error");
+            bar();
+            console.log("after error in try");
+        } catch (e) {
+            console.log("in catch");
+        }
+        console.log("after catch");
+        sham();
+        function sham() {
+        }
+        //bar();
+        //sham();
+
+        function foo() { }
+        foo.prototype.x = 1;
+        var y = new foo();
+        y.x = 3;
+        console.log(y.x);
+        delete y.x;
+        console.log(y.x);
+    </script>
+
+</body>
+</html>
