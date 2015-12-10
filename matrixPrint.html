@@ -1,0 +1,65 @@
+<html>
+
+<head>
+    <title> Matrix print </title>
+</head>
+
+<body>
+
+    <script>
+        (function() {
+            var matrix = [];
+            var m = 5, n = 5;
+            var output = [];
+            var i, j =0;
+            var tempArray;
+            for(i=0;i<m;i++) {
+                tempArray = [];
+                for(j=0;j<n;j++) {
+                    tempArray.push(i*n+j);    
+                }
+                matrix.push(tempArray);
+            } 
+            console.table(matrix);
+            i = parseInt(m/2, 10), j = parseInt(n/2, 10);
+            var step = 0;
+
+            while(true) {
+                step += 1;
+                var end = j + step;
+                while (j < end && j < n) {
+                    output.push(matrix[i][j]);
+                    j++;
+                }
+                if(i === m-1 && j >= n) {
+                    break;
+                }
+                    
+
+                end = i - step;
+                while (i> end && i>=0) {
+                    output.push(matrix[i][j]);
+                    i--;
+                }
+                
+                //going left
+                step += 1;
+                end = j-step;
+                while(j>end && j>=0) {
+                    output.push(matrix[i][j]);
+                    j--;
+                }
+                
+                //going bottom
+                end = i + step;
+                while(i<end && i < m) {
+                    output.push(matrix[i][j]);
+                    i++;
+                }
+            }
+            console.log(output.join(","));
+        })();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,72 @@
+<html>
+
+<head>
+    <title> Matrix print inward </title>
+</head>
+
+<body>
+
+    <script>
+        (function() {
+            var matrix = [];
+            var m = 5, n = 5;
+            var output = [];
+            var i, j =0;
+            var tempArray;
+            for(i=0;i<m;i++) {
+                tempArray = [];
+                for(j=0;j<n;j++) {
+                    tempArray.push(i*n+j);    
+                }
+                matrix.push(tempArray);
+            } 
+            console.table(matrix);
+            i = 0; j = 0;
+            var midI = parseInt(m/2, 10);
+            var midJ = parseInt(n/2, 10);
+            var endI = m;
+            var endJ = n;
+            var end;
+            var cnt = 0;
+            var max = m*n;
+            while(cnt ++ < max) {
+                while(j<endJ) {
+                    output.push(matrix[i][j]);
+                    j++;
+                }
+                j--;
+                i++;
+                // if(i === midI && j === midJ) {
+                //     break;    
+                // }
+                while(i<endI) {
+                    output.push(matrix[i][j]);
+                    i++;
+                }
+                i--;
+                j--;
+
+                end = j - endJ + 1;
+                while(j>end) {
+                    output.push(matrix[i][j]);
+                    j--;
+                }
+                
+                if(i === midI && j === midJ) {
+                    break;    
+                }
+                
+                //endI -= 1;
+                end = i - endI + 1;
+                while(i > end) {
+                    output.push(matrix[i][j]);
+                    i--;
+                }
+
+            }
+            console.log(output.join(","));
+        })();
+    </script>
+</body>
+
+</html>
