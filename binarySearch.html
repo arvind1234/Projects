@@ -1,0 +1,25 @@
+<script>
+function binarySearch(ar, n, start, end) {
+  if(end < start) {
+    return -1;
+  }
+  var m = parseInt((end+start)/2, 10);
+  console.log(start + "," + end + "," + m + "," + ar[m] + "," + n + "," + (ar[m] === n));
+  if(ar[m] === n) {
+    console.log("returning:" + m);
+    return m;
+  } else if(ar[m] > n) {
+    binarySearch(ar, n, start, m - 1);
+  } else if(ar[m] < n) {
+    binarySearch(ar, n, m + 1, end);
+  }
+}
+
+var ar = [5, 10, 15, 20, 25];
+var result = binarySearch(ar, 10, 0, ar.length -1);
+if(result > -1) {
+  console.log("Found at:" + result);
+} else {
+  console.log("Element not found");
+}
+</script>
