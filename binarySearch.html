@@ -14,9 +14,50 @@ function binarySearch(ar, n, start, end) {
     binarySearch(ar, n, m + 1, end);
   }
 }
+function binarySearchIterative(ar, n) {
+    var start = 0, end = ar.length - 1;
+    var mid;
+    while(start <= end) {
+        mid = parseInt((end + start) / 2, 10);
+        if (ar[mid] === n) return mid;
+        else if ((ar[start] <=n && n <= ar[mid])
+        || (ar[start] > ar[mid] && (ar[start] > n && n <= ar[mid]))) {
+            end = mid - 1;
+        } else if ((ar[mid] <= n && n <= ar[end])
+        || ((ar[mid] > ar[end]) && (ar[mid] > n && n <= ar[end]))){
+            start = mid + 1;
+        } else {
+            break;
+        }
+    }   
+    
+    return -1; 
+}
+
+function binarySearchRotated(ar, n, start, end) {
+    if(end < start) {
+        return -1;
+    }
+    var mid = parseInt((end + start)/2, 10);
+    if(ar[mid] === n) {
+        return mid;
+    }
+    
+    //start < n <mid
+    if((ar[start] <= n && n <= ar[mid])
+    || ((ar[start] > ar[mid]) && (ar[start] > n && n <= ar[mid]))) {
+        return binarySearchRotated(ar, n, start, mid - 1);
+    }
+    if((ar[mid] <= n && n <= ar[end])
+    || ((ar[mid] > ar[end]) && (ar[mid] > n && n <= ar[end]))) {
+        return binarySearchRotated(ar, n, mid + 1, end);
+    }
+}
 
 var ar = [5, 10, 15, 20, 25];
-var result = binarySearch(ar, 10, 0, ar.length -1);
+ ar = [15, 20, 25, 5, 10];
+// var result = binarySearchRotated(ar, 100, 0, ar.length -1);
+var result = binarySearchIterative(ar, 10);
 if(result > -1) {
   console.log("Found at:" + result);
 } else {

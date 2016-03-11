@@ -1,0 +1,46 @@
+<html>
+<body>
+<script>
+(function() {
+    function reverse(str, start, end) {
+        str = str.split("");
+        if(!start) {
+            start = 0;
+        }
+        if(!end) {
+            end = str.length - 1;
+        }
+        var temp;
+        while(end > start) {
+            temp = str[start];
+            str[start++] = str[end];
+            str[end--] = temp;
+        }
+        return str.join("");
+    }
+    var sentence = "ab cd ef";
+    sentence = "I am screwed";
+    console.log(sentence);
+    var reversedSentence = reverse(sentence);
+    console.log(reversedSentence);
+    
+    var wordStart = 0, wordEnd = 0;
+    var end = reversedSentence.length;
+    debugger;
+    while (wordStart < end) {
+        while(wordEnd < end && reversedSentence[wordEnd] !== " ") {
+            wordEnd++;
+            continue;
+        }
+        
+        reversedSentence = reverse(reversedSentence, wordStart, wordEnd - 1);
+        
+        wordStart = wordEnd = wordEnd + 1;
+        
+    }
+
+    console.log(reversedSentence);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<html>
+<body>
+<script>
+(function() {
+    var a = [1, 2, 3];
+    a = [1, 2];
+    //1,12,123,2,23,3,31
+    function printCombination(data) {
+        var inputArray = data.inputArray, currentString = data.currentString, start = data.start;
+
+        for (var i = start; i < inputArray.length; i++) {
+            currentString += inputArray[i];
+            console.log(currentString);
+            printCombination({ inputArray: inputArray, currentString: currentString, start: i + 1 });
+            currentString = currentString.substring(0, currentString.length - 1);
+        }
+    }
+    printCombination({ inputArray: a, currentString: "", start: 0 });
+
+})();
+</script>
+</body>
+</html>
