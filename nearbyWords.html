@@ -1,0 +1,39 @@
+<script>
+function findNearByWords(data) {
+    var input = data.input;
+    var index = data.index;
+    var output = data.output;
+    var results = data.results;
+
+    if(output.length === input.length) {
+        if(isWord(output)) {
+            results.push(output);    
+        }
+        return;
+    }
+
+    var nearbyChars = getNearbyCharacters(input[index]);
+    for(var i=0;i<nearbyChars.length;i++) {
+        output += nearbyChars[i];
+        findNearByWords({input: input, index: index + 1, output: output, results: results});
+        output = output.slice(0, -1);
+    }
+    
+    return results;
+}
+
+function getNearbyCharacters(c) {
+    if(c === 'g') {
+        return ['f','g', 'h', 'n'];
+    } 
+    if(c === "i") {
+        return ["i", "o", "k"];
+    }
+}
+
+function isWord(w) {
+    return (w === "hi" || w === "go" || w === "no");
+}
+
+console.log(findNearByWords({input: "gi", index: 0, output: "", results: []}));
+</script>

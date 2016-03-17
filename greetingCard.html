@@ -1,0 +1,78 @@
+<html>
+
+<head>
+    <title> Greeting Card </title>
+    
+    <style type="text/css">
+    #left, #right {
+        position: absolute;
+        left: 50%;
+        border-width: 1px;
+        border-style: solid;
+        border-color: #756129;
+        width: 40%;
+        height: 70%;
+        border-radius: 10px;
+    }
+    #left {
+        z-index: 1;
+    }
+    #right {
+        z-index: 0;
+    }
+    #left.open {
+        /*-webkit-transform: rotateY(180deg);
+        -webkit-transform-origin: left center;
+        -webkit-transition-duration:1500ms;
+        -webkit-transition-timing-function: ease;
+        -webkit-transform-style: preserve-3d;
+        -webkit-transition-property: -webkit-transform;*/     
+        
+        transform: rotateY(180deg);
+        transform-origin: left center;
+        transition-duration:1500ms;
+        transition-timing-function: ease;
+        transform-style: preserve-3d;
+        transition-property: transform;
+        background-color: beige;   
+    }
+    div.top {
+        top: 10%;
+        /*-webkit-transform: rotate(-1deg);
+        -webkit-transform-origin: left bottom;*/
+        transform: rotate(-1deg);
+        transform-origin: left bottom;
+        background-color: #472b52;
+    }
+    div.bottom {
+        top: 10%;
+        background-color: beige;
+    }
+    </style>
+</head>
+
+<body>
+
+    <div id="left" class="top">
+        To somebody I love...       
+        
+        Click to open
+    </div>
+    <div id="right" class="bottom">
+        Many happy returns of the day...
+    </div>
+
+    <script>
+    var leftDiv = document.getElementById("left");
+    leftDiv.addEventListener("click", function () {
+        if(leftDiv.classList.contains("open")) {
+            //do nothing
+            return;
+        }
+        leftDiv.classList.add("open");
+    })
+    
+    </script>
+</body>
+
+</html>

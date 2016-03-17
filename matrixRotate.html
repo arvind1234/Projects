@@ -1,0 +1,41 @@
+<html>
+
+<head>
+    <title> Matrix print inward </title>
+</head>
+
+<body>
+
+    <script>
+        (function() {
+            var matrix = [];
+            var m = 5, n = 5;
+            var tempArray;
+            for(i=0;i<m;i++) {
+                tempArray = [];
+                for(j=0;j<n;j++) {
+                    tempArray.push(i*n+j);    
+                }
+                matrix.push(tempArray);
+            } 
+            console.table(matrix);
+            var mid = parseInt(n/2, 10);
+            for(var layer=0;layer<mid;layer++) {
+                var first = layer;
+                var last = n - 1 - layer;
+                for(var i = first; i<last;i++) {
+                    var temp = matrix[first][i];
+                    var offset = i - first;
+                    matrix[first][i] = matrix[last - offset][first];
+                    matrix[last-offset][first] = matrix[last][last-offset];
+                    matrix[last][last-offset] = matrix[i][last];
+                    matrix[i][last] = temp;
+                }
+            }
+            
+            console.table(matrix);
+        })();
+    </script>
+</body>
+
+</html>
