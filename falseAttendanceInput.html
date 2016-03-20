@@ -1,0 +1,44 @@
+<script>
+function foo(output, curr, l, ac, input) {
+  if(curr.length >= l) {
+    output.push(curr);
+    return;
+  }
+  
+  var canAddA = ac < 1;
+  var canAddL = curr.length < 2 || curr[curr.length - 1] !== "L" || curr[curr.length - 2] !== "L";
+  
+  if(!canAddA && !canAddL) {
+      //short circuit the recursion
+      var temp = curr;
+      while(temp.length < l) {
+          temp += "O";
+      }
+      output.push(temp);
+      return;
+  }
+  
+  for(var i=0;i<input.length;i++) {
+    if(input[i] === "A" && canAddA) {
+        ac += 1;
+        curr += "A";
+        foo(output, curr, l, ac, input);
+        curr = curr.slice(0, -1);
+        ac -= 1;  
+    } else if(input[i] === "L" && canAddL) {
+        curr += "L";
+        foo(output, curr, l, ac, input);
+        curr = curr.slice(0, -1);        
+    } else {
+        curr += "O";
+        foo(output, curr, l, ac, input);
+        curr = curr.slice(0, -1);
+
+    }
+  }
+}
+
+var output = [];
+foo(output, "", 15, 0, ["L", "O", "A"]);
+console.log(output);
+</script>
