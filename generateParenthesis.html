@@ -1,0 +1,23 @@
+<script>
+ function foo(curr, n, left, right) {
+  if(left >= n && right >= n) {
+    console.log(curr);
+    return;
+  }
+  
+  if(left < n) {
+    curr += "(";
+        //console.log(curr);
+    foo(curr, n, left + 1, right);
+    curr = curr.slice(0, -1);
+  }
+  if (left > right) {
+    curr += ")";
+            //console.log(curr);
+    foo(curr, n, left, right + 1);
+    curr = curr.slice(0, -1);
+  }
+}
+
+foo("", 3, 0, 0);
+ </script>
