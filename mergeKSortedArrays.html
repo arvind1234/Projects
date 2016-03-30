@@ -1,0 +1,46 @@
+<script>
+ var ar = [
+     [2,5,6],
+     [4,7,9,10],
+     [1,3]
+ ];
+ 
+ function mergeArrays(ar) {
+    var k = ar.length;
+    var idx = [];
+    var result = [];
+    var i = 0;
+    var finished = true;
+    var minIdx = 0;
+    
+    debugger;
+    while(true) {
+        finished = true;
+        for(i = 0; i < k; i++) {
+            idx[i] = idx[i] || 0;
+            if(idx[i] < (ar[i]).length) {
+                finished &= false;
+                break;
+            }
+        }
+        if(finished) {
+            console.log(result);
+            return;
+        }
+        
+        minIdx = 0;
+        for(i = 1; i < k; i++) {
+            idx[i] = idx[i] || 0;
+            if((idx[minIdx] >= ar[minIdx].length)
+            || (idx[i] < ar[i].length && ar[i][idx[i]] < ar[minIdx][idx[minIdx]])) {
+                minIdx = i;
+            }
+        }
+        
+        result.push(ar[minIdx][idx[minIdx]]);
+        idx[minIdx]++;
+    }
+ }
+ 
+ mergeArrays(ar);
+ </script>
