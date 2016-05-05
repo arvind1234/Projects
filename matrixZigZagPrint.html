@@ -1,59 +1,89 @@
-<html>
+<script>
+(function() {
+    var grid = [];
+    var size = 5;
+    var temp;
+    for(var i=0;i<size;i++) {
+        temp = [];
+        for(j=0;j<size;j++) {
+            temp.push(i*size+j);
+        }
+        grid.push(temp);
+    }
+    console.table(grid);
 
-<head>
-    <title> Matrix print zig zag </title>
-</head>
-
-<body>
-
-    <script>
-        (function() {
-            var matrix = [];
-            var m = 5, n = 5;
-            var tempArray;
-            for(i=0;i<m;i++) {
-                tempArray = [];
-                for(j=0;j<n;j++) {
-                    tempArray.push(i*n+j);    
-                }
-                matrix.push(tempArray);
-            } 
-            console.table(matrix);
-            var i, j;
-            i = j = 0;
-            tempArray = [];
-            while( i < n && j < n) {
-                while(i < n && j >=0) {
-                    tempArray.push(matrix[i][j]);
-                    i++; j--;
-                }
-                
-                if(i === n) {
-                    i = n-1;
-                    j += 2;
-                    
-                }
-                else if(j < 0) {
-                  j = 0;  
-                } 
-                
-                while(i >= 0 && j <n) {
-                    tempArray.push(matrix[i][j]);
-                    i--; j++;
-                }
-
-                if(j === n) {
-                    j = n - 1;
-                    i += 2;
-                } else if(i < 0) {
-                    i = 0;
-                }
-                
+    function zigZag(matrix) {
+        var i, j;
+        i = j = 0;
+        var n = matrix.length;
+        tempArray = [];
+        while( i < n && j < n) {
+            while(i < n && j >=0) {
+                tempArray.push(matrix[i][j]);
+                i++; j--;
             }
             
-            console.log(tempArray);
-        })();
-    </script>
-</body>
+            if(i === n) {
+                i = n-1;
+                j += 2;
+                
+            }
+            else if(j < 0) {
+                j = 0;  
+            } 
+            
+            while(i >= 0 && j <n) {
+                tempArray.push(matrix[i][j]);
+                i--; j++;
+            }
 
-</html>
+            if(j === n) {
+                j = n - 1;
+                i += 2;
+            } else if(i < 0) {
+                i = 0;
+            }
+            
+        }    
+        console.log(tempArray);
+    }
+    zigZag(grid);
+
+    function printDiagonal(matrix) {
+        var i = 0, j = 0;
+        var n = matrix.length;
+        var results = [];
+        var temp;
+        while(true) {
+            temp = [];
+            while(i >= 0 && j < n) {
+                temp.push(matrix[i][j]);
+                i--; j++;
+            }
+
+            results.push(temp);
+            if(i === n-2 && j === n) {
+                break;
+            }
+            if(j >= n) {
+                var t = i;
+                i = j;
+                j = t;
+                i -= 1;
+                j += 2;
+            } else if(i < 0) {
+                var t = i;
+                i = j;
+                j = t;
+                j += 1;
+            }
+        }
+        results.forEach(function(r) {
+            console.log(r);
+        });
+    }
+
+    printDiagonal(grid);
+})();
+
+</script>
