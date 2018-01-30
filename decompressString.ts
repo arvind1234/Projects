@@ -60,4 +60,4 @@ function decompressString(str: string) {
     console.log(result, result === "xxabcdcdabcdcdabcdcdts");
 }
 
-decompressString("2[x]3[ab2[cd]]ts");
+decompressString("2[x]3[ab002[cd]]ts");

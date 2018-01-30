@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>JS Bin</title>
+
+    <style>
+        #div1 {
+            border: 1px solid blue;
+            width: 200px;
+            height: 200px;
+          }
+          
+          #div2 {
+            border: 1px solid red;
+            margin: 10px;
+            width: 50px;
+            height: 50px
+          }
+          
+          #div3 {
+            border: 1px solid black;
+          }
+    </style>
+</head>
+
+<body>
+    <div id="div1" ondrop="drop_handler(event);" ondragover="dragover_handler(event);">Drop Zone</div>
+
+    <div id="div3" draggable="true" ondragstart="dragstart_handler(event);">
+        <div id="div2">Drag me!</div>
+    </div>
+
+    <script>
+        function dragstart_handler(ev) {
+            // Add the target element's id to the data transfer object
+            ev.dataTransfer.setData("text/plain", ev.target.id);
+            ev.dropEffect = "move";
+           }
+           function dragover_handler(ev) {
+            ev.preventDefault();
+            // Set the dropEffect to move
+            ev.dataTransfer.dropEffect = "move"
+           }
+           function drop_handler(ev) {
+            ev.preventDefault();
+            // Get the id of the target and add the moved element to the target's DOM
+            var data = ev.dataTransfer.getData("text");
+            ev.target.appendChild(document.getElementById(data));
+           }
+    </script>
+</body>
+
+</html>
