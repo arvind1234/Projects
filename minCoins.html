@@ -1,0 +1,53 @@
+<script>
+
+function count(coins, n) {
+    var t = new Array(n+1);
+    var ref = new Array(n+1);
+    var i;
+    t[0] = 0;
+    ref[0] = -1;
+
+    for(i=1;i<n+1;i++) {
+        t[i] = Number.MAX_VALUE;
+        ref[i] = -1;
+    }
+    
+    for(i=0;i<coins.length;i++){
+        for(var j=1;j<=n;j++){
+            var currCoin = coins[i];
+            var currVal = t[j];
+            var newVal = 0;
+            if(currCoin > j) {
+                continue;
+            }
+            newVal = 1 + t[j - currCoin];
+            if(newVal < currVal) {
+                t[j] = newVal;
+                ref[j] = i;
+            }
+        }
+    }
+    
+    console.log("Numebr of coins:" + t[n]);
+    //console.log(ref);
+    
+    var result = [];
+    var val = n;
+    if(ref[val] === -1) {
+        console.log("No solution");
+        return;
+    }
+    while(val > 0) {
+        var idx = ref[val];
+        result.push(coins[idx]);
+        val = val - coins[idx];        
+    }
+
+   
+    console.log(result);
+}
+count([7, 4, 1, 2], 22);
+// count([7, 4, 1, 2], 5);
+// count([7, 4, 1, 2], 3);
+ count([7, 4, 1, 2], 0);
+</script>
