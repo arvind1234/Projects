@@ -1,0 +1,43 @@
+<html>
+
+<head>
+	<title>
+		Substring
+	</title>
+</head>
+
+<body>
+	<script>
+	(function() {
+		var para = "He is a boy. He plays tenis.".split(" ");
+		// var para = "He He plays tennis. is a boy. He plays tennis.".split(" ");
+		var key = "He plays tennis.".split(" ");
+		//key = "1 2 3".split(" ");
+		// console.log(para.length, key.length);
+
+		for (var i = 0; i < para.length; i++) {
+			console.log(i);
+			var start = i;
+			for (var j = 0; j <= key.length;) {
+				if (j === key.length) {
+					// reached end of the key
+					console.log("match found at " + (start - key.length));
+					return;
+				}
+
+				var k = key[j];
+				var p = para[start];
+				if (k === p) {
+					start++;
+					j++;
+				} else {
+					// mistmatch
+					break;
+				}
+			}
+		}
+	})();
+	</script>
+</body>
+
+</html>
