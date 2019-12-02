@@ -1,0 +1,27 @@
+<script>
+    var grid = new Array(9);
+    var cnt = 0;
+    for(var i=0;i<9;i++) {
+        grid[i] = grid[i] || new Array(9);
+        for(var j=0;j<9;j++) {
+            grid[i][j] = cnt++; 
+        }
+    }
+    console.table(grid);
+    
+    function getGrids(startRow,startCol) {
+        var subgrid = [];
+        for(var i=startRow; i<startRow+3;i++) {
+            for(var j=startCol; j<startCol+3;j++) {
+                subgrid.push(grid[i][j]);
+            }
+        }
+        console.log(subgrid.join(","));
+    }
+    
+    for(i=0;i<9;i+=3) {
+        for(j=0;j<9;j+=3) {
+            getGrids(i,j);            
+        }
+    }
+</script>
