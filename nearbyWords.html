@@ -22,6 +22,31 @@ function findNearByWords(data) {
     return results;
 }
 
+function findNearByWords1(data) {
+    var input = data.input;
+    var index = data.index;
+    var output = data.output;
+    var results = data.results;
+
+    if(output.length === input.length) {
+        if(isWord(output)) {
+            results.push(output);    
+        }
+        return;
+    }
+
+    for(var j=index;j<input.length;j++) {
+        var nearbyChars = getNearbyCharacters(input[j]);
+        for(var i=0;i<nearbyChars.length;i++) {
+            output += nearbyChars[i];
+            findNearByWords({input: input, index: index + 1, output: output, results: results});
+            output = output.slice(0, -1);
+        }
+    }
+    
+    return results;
+}
+
 function getNearbyCharacters(c) {
     if(c === 'g') {
         return ['f','g', 'h', 'n'];
@@ -35,5 +60,5 @@ function isWord(w) {
     return (w === "hi" || w === "go" || w === "no");
 }
 
-console.log(findNearByWords({input: "gi", index: 0, output: "", results: []}));
+console.log(findNearByWords1({input: "gi", index: 0, output: "", results: []}));
 </script>
